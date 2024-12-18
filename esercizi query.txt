@@ -1,0 +1,63 @@
+﻿esercizi query
+-- Recupera tutti gli utenti registrati nel sistema.
+select *
+from utenti u 
+
+
+-- Recupera il nome, cognome e email di tutti gli utenti iscritti dopo il 1° marzo 2024.
+select nome, cognome, email 
+from utenti u 
+where data_iscrizione > "2024-03-01"
+
+
+-- Recupera tutti gli articoli insieme al nome e cognome dell'autore.
+select a.*, u.nome, u.cognome 
+from articoli a
+        inner join utenti u 
+on a.id_articolo = u.id_utente;
+
+
+-- Recupera i titoli degli articoli pubblicati nel mese di maggio 2024.
+select titolo 
+from articoli a 
+where  year(data_pubblicazione) = 2024 and month(data_pubblicazione) = 5
+
+
+-- Recupera le prime 5 categorie ordinate alfabeticamente per nome.
+select *
+from categorie c 
+order by nome_categoria 
+limit 5
+
+
+-- Recupera gli articoli che appartengono alla categoria 'Tecnologia'.
+select *
+from articoli a
+        inner join categorie c 
+where c.nome_categoria = "Tecnologia"
+
+
+-- Recupera le email degli utenti che hanno scritto almeno un articolo.
+select u.email
+from utenti u 
+        inner join articoli a 
+on u.id_utente = a.id_utente
+
+
+-- Recupera tutti gli articoli pubblicati tra il 1° giugno 2024 e il 31 agosto 2024.
+select titolo 
+from articoli a 
+where data_pubblicazione > "2024-06-01" and data_pubblicazione < "2024-08-31"
+
+
+-- Recupera i dettagli delle categorie associate all'articolo con id_articolo = 10.
+select *
+from categorie c 
+        inner join articoli a 
+where a.id_articolo = 10
+
+
+-- Recupera i nomi degli utenti ordinati per data di iscrizione più recente.
+select nome, data_iscrizione 
+from utenti u 
+order by data_iscrizione desc;
